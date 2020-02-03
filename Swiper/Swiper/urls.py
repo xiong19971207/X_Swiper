@@ -23,6 +23,9 @@ urlpatterns = [
 
     # 测试
     url(r'^user/testhelloworld/', user_api.testhelloworld),
+
     url(r'^api/user/gen_eamil/', user_api.gen_email),
+    url(r'^api/user/submit_vcode/',user_api.submit_vcode)
+
 
 ]
