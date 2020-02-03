@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^test/', include(('UserApp.urls', 'user'), namespace='test')),
 
     # 测试
-    url(r'^user/testhelloworld/', user_api.testhelloworld)
+    url(r'^user/testhelloworld/', user_api.testhelloworld),
+    url(r'^api/user/gen_eamil/', user_api.gen_email),
 
 ]
