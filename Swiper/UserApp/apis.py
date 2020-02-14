@@ -1,13 +1,13 @@
 from django.core.cache import cache
 from django.core.mail import send_mail
-from django.http import JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
 from UserApp import logics
 from UserApp.logics import gen_random_code
-from UserApp.models import User
+from UserApp.models import User, Profile
 from common import stat
+from libs.http import render_json
 
 
 def testhelloworld(request):
@@ -22,9 +22,9 @@ def gen_vcode(request):
     phonenum = request.GET.get('phonenum')
     status = logics.send_vcode(phonenum)
     if status:
-        return JsonResponse({'code': stat.OK, 'data': None})
+        return render_json()
     else:
-        return JsonResponse({'code': stat.VCODE_ERR, 'data': None})
+        return render_json(code=stat.VCODE_ERR)
 
 
 def gen_email(request):
@@ -48,9 +48,9 @@ def gen_email(request):
 
     if email:
         cache.set('vcode-%s' % email, vcode, 180)
-        return JsonResponse({'code': stat.OK, 'data': None})
+        return render_json()
     else:
-        return JsonResponse({'code': stat.VCODE_ERR, 'data': None})
+        return render_json(code=stat.VCODE_ERR)
 
 
 def submit_vcode(request):
@@ -65,11 +65,11 @@ def submit_vcode(request):
         except User.DoesNotExist:
             user = User.objects.create(phonenum=email)
         request.session['uid'] = user.id
-        return JsonResponse({'code': stat.OK, 'data': user.to_dict()})
+        return render_json(data=user.to_dict())
     else:
-        return JsonResponse({'code': stat.VCODE_ERR, 'data': None})
+        return render_json(code=stat.VCODE_ERR)
 
 
 def get_profile(request):
-    user = User.objects.get(id=request.uid)
-    return JsonResponse(user.profile.to_dict())
+    profile, _ = Profile.objects.get_or_create(id=request.uid)
+    return render_json(profile.to_dict())
