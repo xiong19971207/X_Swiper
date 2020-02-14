@@ -19,7 +19,7 @@ class User(models.Model):
     nickname = models.CharField(verbose_name='昵称', max_length=64, default='匿名用户')
     gender = models.CharField(verbose_name='性别', max_length=6, choices=SEX)
     birthday = models.DateField(verbose_name='生日', max_length=32, default='1990-01-01')
-    location = models.CharField(verbose_name='常住地', max_length=256,choices=LOCATION)
+    location = models.CharField(verbose_name='常住地', max_length=256, choices=LOCATION)
     avatar = models.CharField(verbose_name='形象', max_length=256)
 
     def to_dict(self):
@@ -33,8 +33,15 @@ class User(models.Model):
             'birthday': str(self.birthday),
         }
 
+    @property
+    def profile(self):
+        if not hasattr(self,'_profile'):
+            self._profile, _ = Profile.objects.get_or_create(id=self.id)
+        return self._profile
+
     class Meta:
         db_table = 'User'
+
 
 class Profile(models.Model):
     '''个人资料'''
@@ -64,5 +71,3 @@ class Profile(models.Model):
 
     class Meta:
         db_table = 'Profile'
-
-

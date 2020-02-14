@@ -1,2 +1,3 @@
 OK = 0
 VCODE_ERR = 1000
+LoginErr = 1002

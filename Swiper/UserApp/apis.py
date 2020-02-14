@@ -54,7 +54,6 @@ def gen_email(request):
 
 
 def submit_vcode(request):
-
     vcode = request.POST.get('vcode')
     email = request.POST.get('email')
     ck_vcode = cache.get('vcode-%s' % email)
@@ -66,6 +65,11 @@ def submit_vcode(request):
         except User.DoesNotExist:
             user = User.objects.create(phonenum=email)
         request.session['uid'] = user.id
-        return JsonResponse({'code':stat.OK,'data':user.to_dict()})
+        return JsonResponse({'code': stat.OK, 'data': user.to_dict()})
     else:
-      return JsonResponse({'code': stat.VCODE_ERR, 'data': None})
+        return JsonResponse({'code': stat.VCODE_ERR, 'data': None})
+
+
+def get_profile(request):
+    user = User.objects.get(id=request.uid)
+    return JsonResponse(user.profile.to_dict())
