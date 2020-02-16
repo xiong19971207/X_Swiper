@@ -1,3 +1,6 @@
 OK = 0
 VCODE_ERR = 1000
+SUBCODE_ERR = 1001
 LoginErr = 1002
+UserFormErr = 1003
+ProFormErr = 1004

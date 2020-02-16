@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^api/user/gen_eamil/', user_api.gen_email),
     url(r'^api/user/submit_vcode/',user_api.submit_vcode),
     url(r'api/user/get_profile/',user_api.get_profile),
+    url(r'api/user/set_profile',user_api.set_profile)
 
 
 ]

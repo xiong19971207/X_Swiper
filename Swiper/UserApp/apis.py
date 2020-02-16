@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from UserApp import logics
+from UserApp.forms import UserForm, ProfileForm
 from UserApp.logics import gen_random_code
 from UserApp.models import User, Profile
 from common import stat
@@ -67,9 +68,26 @@ def submit_vcode(request):
         request.session['uid'] = user.id
         return render_json(data=user.to_dict())
     else:
-        return render_json(code=stat.VCODE_ERR)
+        return render_json(code=stat.SUBCODE_ERR)
 
 
 def get_profile(request):
     profile, _ = Profile.objects.get_or_create(id=request.uid)
     return render_json(profile.to_dict())
+
+
+def set_profile(request):
+    user_form = UserForm(request.POST)
+    profile_form = ProfileForm(request.POST)
+
+    if not user_form.is_valid():
+        # 检查是否符合要求
+        return render_json(user_form.errors, stat.UserFormErr)
+    if not profile_form.is_valid():
+        return render_json(profile_form.errors, stat.ProFormErr)
+
+    # 数据清洗与保存
+    User.objects.filter(id=request.uid).update(**user_form.cleaned_data)
+    Profile.objects.filter(id=request.uid).update(**profile_form.cleaned_data)
+
+    return render_json()
