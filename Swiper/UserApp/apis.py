@@ -3,12 +3,15 @@ from django.core.mail import send_mail
 from django.shortcuts import render
 
 # Create your views here.
+import os
+
 from UserApp import logics
 from UserApp.forms import UserForm, ProfileForm
 from UserApp.logics import gen_random_code
 from UserApp.models import User, Profile
 from common import stat
 from libs.http import render_json
+from libs.qn_cloud import upload_to_qn
 
 
 def testhelloworld(request):
@@ -90,4 +93,14 @@ def set_profile(request):
     User.objects.filter(id=request.uid).update(**user_form.cleaned_data)
     Profile.objects.filter(id=request.uid).update(**profile_form.cleaned_data)
 
+    return render_json()
+
+
+def upload_avatar(request):
+    avatar = request.FILES.get('avatar')
+    filepath, filename = logics.save_avatar(request.uid, avatar)
+    avatar_url = upload_to_qn(filename,filepath)
+
+    User.objects.filter(id=request.uid).update(avatar=avatar_url)
+    os.remove(filepath)
     return render_json()

@@ -30,3 +30,12 @@ def send_vcode(mobile):
             return True
     return False
 
+
+def save_avatar(uid, avatar):
+    '''本地保存图片'''
+    filename = 'avatar-%s' % uid
+    filepath = './tmp/%s' % filename
+    with open(filepath, 'wb') as fp:
+        for chunk in avatar.chunks():
+            fp.write(chunk)
+    return filepath, filename
