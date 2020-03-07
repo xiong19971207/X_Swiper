@@ -1,5 +1,6 @@
 from django.core.cache import cache
 from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
@@ -11,12 +12,11 @@ from UserApp.logics import gen_random_code
 from UserApp.models import User, Profile
 from common import stat
 from libs.http import render_json
-from libs.qn_cloud import upload_to_qn
 
 
 def testhelloworld(request):
     return render(request, 'test.html')
-
+    # return HttpResponseRedirect('/test/test2/')
 
 def gen_vcode(request):
     '''
@@ -98,9 +98,7 @@ def set_profile(request):
 
 def upload_avatar(request):
     avatar = request.FILES.get('avatar')
-    filepath, filename = logics.save_avatar(request.uid, avatar)
-    avatar_url = upload_to_qn(filename,filepath)
-
-    User.objects.filter(id=request.uid).update(avatar=avatar_url)
-    os.remove(filepath)
+    logics.upload_avatar.delay(request.uid,avatar)
     return render_json()
+
+

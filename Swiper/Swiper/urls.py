@@ -19,16 +19,16 @@ from UserApp import apis as user_api
 
 urlpatterns = [
 
-    url(r'^test/', include(('UserApp.urls', 'user'), namespace='test')),
+    url(r'^test/', include('UserApp.urls')),
 
     # 测试
     url(r'^user/testhelloworld/', user_api.testhelloworld),
 
+    # 用户模块
     url(r'^api/user/gen_eamil/', user_api.gen_email),
-    url(r'^api/user/submit_vcode/',user_api.submit_vcode),
-    url(r'api/user/get_profile/',user_api.get_profile),
-    url(r'api/user/set_profile',user_api.set_profile),
-    url(r'api/user/upload_avatar',user_api.upload_avatar)
-
+    url(r'^api/user/submit_vcode/', user_api.submit_vcode),
+    url(r'api/user/get_profile/', user_api.get_profile),
+    url(r'api/user/set_profile', user_api.set_profile),
+    url(r'api/user/upload_avatar', user_api.upload_avatar),
 
 ]

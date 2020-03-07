@@ -1,9 +1,12 @@
+import os
 import random
 
 import requests
-from django.core.mail import send_mail
 
 from Swiper import config
+from UserApp.models import User
+from libs.qn_cloud import upload_to_qn
+from tasks import celery_app
 
 
 def gen_random_code(length=6):
@@ -39,3 +42,13 @@ def save_avatar(uid, avatar):
         for chunk in avatar.chunks():
             fp.write(chunk)
     return filepath, filename
+
+
+@celery_app.task
+def upload_avatar(uid, avatar):
+    filepath, filename = save_avatar(uid, avatar)
+    avatar_url = upload_to_qn(filepath, filename)
+
+    User.objects.filter(id=uid).update(avatar=avatar_url)
+    print('----------------------')
+    os.remove(filepath)

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4de1fc00-204b-415f-9b5c-ded074df7d87" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Swiper/Swiper/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Swiper/Swiper/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Swiper/UserApp/apis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Swiper/UserApp/apis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Swiper/template/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/Swiper/template/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/X_Swiper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/X_Swiper.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +17,10 @@
   </component>
   <component name="ProjectId" id="1XkNAOpbUan8jbjVUuXJ8VInMg1" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Swiper" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -43,6 +45,7 @@
       <option name="presentableId" value="Default" />
       <updated>1581585988780</updated>
       <workItem from="1581585990208" duration="13000" />
+      <workItem from="1582285112945" duration="165000" />
     </task>
     <servers />
   </component>
@@ -54,7 +57,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
