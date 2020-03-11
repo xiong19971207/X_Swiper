@@ -44,7 +44,7 @@ def gen_email(request):
 
     from_email = '17855370672@163.com'
     recipient_list = [email]
-    print(recipient_list)
+    print(str(recipient_list))
 
     html_message = '<h1>你的验证码是:</h1>' + vcode
     send_mail(subject=subject, message=message, html_message=html_message, from_email=from_email,
