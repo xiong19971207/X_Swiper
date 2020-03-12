@@ -12,12 +12,16 @@ def rcmd(uid):
     earliest_birthday = today - datetime.timedelta(profile.max_dating_age * 365)
     latest_birthday = today - datetime.timedelta(profile.min_dating_age * 365)
 
+    # 排除已经划过的人的ID
+    sid_list = Swiped.objects.filter(uid=uid).values_list('sid',flat=True)
+    print(sid_list)
+
     users = User.objects.filter(
         gender=profile.dating_gender,
         location=profile.dating_location,
         birthday__gte=earliest_birthday,
         birthday__lte=latest_birthday
-    )[:10]
+    ).exclude(id__in=sid_list)[:10]
 
     return users
 
