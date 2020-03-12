@@ -11,4 +11,10 @@ def rcmd_user(request):
 def like(request):
     sid = int(request.POST.get('sid'))
     is_matched = logics.like_someone(request.uid, sid)
-    return render_json({'is_matched':is_matched})
+    return render_json({'is_matched': is_matched})
+
+
+def superlike(request):
+    sid = int(request.POST.get('sid'))
+    is_matched = logics.superlike_someone(request.uid, sid)
+    return render_json({'is_matched': is_matched})

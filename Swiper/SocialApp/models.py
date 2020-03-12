@@ -14,7 +14,12 @@ class Swiped(models.Model):
 
     @classmethod
     def is_liked(cls, uid, sid):
-        return cls.objects.filter(uid=uid, sid=sid, stype__in=('like', 'superlike')).exists()
+        like_types = ['like', 'superlike']
+        try:
+            swiped_record = cls.objects.get(uid=uid, sid=sid)
+            return swiped_record.stype in like_types
+        except cls.DoesNotExist:
+            return None
 
     class Meta:
         db_table = 'swiped'

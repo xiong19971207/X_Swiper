@@ -35,5 +35,6 @@ urlpatterns = [
     # 社交模块
     url(r'^api/social/rcmd_user',social_api.rcmd_user),
     url(r'^api/social/like',social_api.like),
+    url(r'^api/social/superlike',social_api.superlike),
 
 ]

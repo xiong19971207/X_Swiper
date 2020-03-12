@@ -14,3 +14,10 @@ QN_secret_key = 'Ut36CPmAMt-obfmfRvyt7XYKqi2qozQ5uKi0JPVj'
 Bucket_Name = 'xxr'
 
 qn_url = 'https://q5y82hdwz.bkt.clouddn.com'
+
+# Redis配置
+REDIS = {
+    'host': 'localhost',
+    'port': 6379,
+    'db': 5
+}
