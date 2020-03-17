@@ -1,4 +1,6 @@
-from django.db import models
+from django.db import models, IntegrityError
+
+from common import stat
 
 
 class Swiped(models.Model):
@@ -20,6 +22,15 @@ class Swiped(models.Model):
             return swiped_record.stype in like_types
         except cls.DoesNotExist:
             return None
+
+    @classmethod
+    def swipe(cls, uid, sid, stype):
+        if cls.stype not in ['like', 'superlike', 'dislike']:
+            raise stat.StypeErr
+        try:
+            cls.objects.create(uid=uid, sid=sid, stype=stype)
+        except IntegrityError:
+            raise stat.ReswipeErr
 
     class Meta:
         db_table = 'swiped'
