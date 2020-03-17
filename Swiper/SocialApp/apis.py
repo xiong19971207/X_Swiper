@@ -18,3 +18,9 @@ def superlike(request):
     sid = int(request.POST.get('sid'))
     is_matched = logics.superlike_someone(request.uid, sid)
     return render_json({'is_matched': is_matched})
+
+
+def dislike(request):
+    sid = int(request.POST.get('sid'))
+    logics.dislike_someone(request.uid, sid)
+    return render_json()

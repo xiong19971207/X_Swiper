@@ -42,7 +42,6 @@ def rcmd(uid):
 
 
 def like_someone(uid, sid):
-
     # 添加滑动记录
     Swiped.objects.create(uid=uid, sid=sid, stype='like')
 
@@ -74,3 +73,11 @@ def superlike_someone(uid, sid):
     else:
         rds.rpush('FIRST_Q-%s' % sid, uid)
         return False
+
+
+def dislike_someone(uid, sid):
+    # 添加滑动记录
+    Swiped.objects.create(uid=uid, sid=sid, stype='dislike')
+
+    # 滑动过的人从优先推荐队列删除
+    rds.lrem('FIRST_Q-%s' % uid, 1, sid)

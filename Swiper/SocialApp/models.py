@@ -23,6 +23,7 @@ class Swiped(models.Model):
 
     class Meta:
         db_table = 'swiped'
+        unique_together = [['uid', 'sid']]
 
 
 class Friend(models.Model):
