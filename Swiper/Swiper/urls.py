@@ -13,8 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from django.urls import include
+from django.conf.urls import url, include
+# from django.urls import include
 from UserApp import apis as user_api
 from SocialApp import apis as social_api
 
@@ -31,10 +31,11 @@ urlpatterns = [
     url(r'api/user/get_profile/', user_api.get_profile),
     url(r'api/user/set_profile', user_api.set_profile),
     url(r'api/user/upload_avatar', user_api.upload_avatar),
-    
+
     # 社交模块
-    url(r'^api/social/rcmd_user',social_api.rcmd_user),
-    url(r'^api/social/like',social_api.like),
-    url(r'^api/social/superlike',social_api.superlike),
+    url(r'^api/social/rcmd_user', social_api.rcmd_user),
+    url(r'^api/social/like', social_api.like),
+    url(r'^api/social/superlike', social_api.superlike),
+    url(r'^api/social/dislike', social_api.dislike),
 
 ]

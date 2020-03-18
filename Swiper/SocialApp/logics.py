@@ -43,7 +43,7 @@ def rcmd(uid):
 
 def like_someone(uid, sid):
     # 添加滑动记录
-    Swiped.objects.create(uid=uid, sid=sid, stype='like')
+    Swiped.swipe(uid, sid, 'like')
 
     # 滑动过的人从优先推荐队列删除
     rds.lrem('FIRST_Q-%s' % uid, 1, sid)
@@ -58,7 +58,7 @@ def like_someone(uid, sid):
 
 def superlike_someone(uid, sid):
     # 添加滑动记录
-    Swiped.objects.create(uid=uid, sid=sid, stype='superlike')
+    Swiped.swipe(uid, sid, 'superlike')
 
     # 滑动过的人从优先推荐队列删除
     rds.lrem('FIRST_Q-%s' % uid, 1, sid)
@@ -77,7 +77,7 @@ def superlike_someone(uid, sid):
 
 def dislike_someone(uid, sid):
     # 添加滑动记录
-    Swiped.objects.create(uid=uid, sid=sid, stype='dislike')
+    Swiped.swipe(uid, sid, 'dislike')
 
     # 滑动过的人从优先推荐队列删除
     rds.lrem('FIRST_Q-%s' % uid, 1, sid)

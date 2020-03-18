@@ -1,10 +1,8 @@
 from django.core.cache import cache
 from django.core.mail import send_mail
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-import os
 
 from UserApp import logics
 from UserApp.forms import UserForm, ProfileForm
@@ -16,7 +14,6 @@ from libs.http import render_json
 
 def testhelloworld(request):
     return render(request, 'test.html')
-    # return HttpResponseRedirect('/test/test2/')
 
 def gen_vcode(request):
     '''
@@ -54,7 +51,7 @@ def gen_email(request):
         cache.set('vcode-%s' % email, vcode, 180)
         return render_json()
     else:
-        return render_json(code=stat.VCODE_ERR)
+        raise stat.VCODE_ERR
 
 
 def submit_vcode(request):
@@ -71,7 +68,7 @@ def submit_vcode(request):
         request.session['uid'] = user.id
         return render_json(data=user.to_dict())
     else:
-        return render_json(code=stat.SUBCODE_ERR)
+        raise stat.SUBCODE_ERR
 
 
 def get_profile(request):
@@ -85,9 +82,9 @@ def set_profile(request):
 
     if not user_form.is_valid():
         # 检查是否符合要求
-        return render_json(user_form.errors, stat.UserFormErr)
+        raise stat.UserFormErr(user_form.errors)
     if not profile_form.is_valid():
-        return render_json(profile_form.errors, stat.ProFormErr)
+        raise stat.ProFormErr(profile_form.errors)
 
     # 数据清洗与保存
     User.objects.filter(id=request.uid).update(**user_form.cleaned_data)

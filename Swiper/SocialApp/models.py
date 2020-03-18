@@ -25,7 +25,8 @@ class Swiped(models.Model):
 
     @classmethod
     def swipe(cls, uid, sid, stype):
-        if cls.stype not in ['like', 'superlike', 'dislike']:
+        if stype not in ['like', 'superlike', 'dislike']:
+            # 千万不能写成cls.stype
             raise stat.StypeErr
         try:
             cls.objects.create(uid=uid, sid=sid, stype=stype)

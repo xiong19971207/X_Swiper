@@ -42,7 +42,9 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'common.middleware.AuthMiddleware'
+    'common.middleware.AuthMiddleware',
+    'common.middleware.logicErrMiddleware'
+
 ]
 
 ROOT_URLCONF = 'Swiper.urls'
@@ -69,9 +71,9 @@ WSGI_APPLICATION = 'Swiper.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'swiper4',
+        'NAME': 'mysql80',
         'USER': 'root',
-        'PASSWORD': '123',
+        'PASSWORD': '1234',
         'HOST': 'localhost',
         'PORT': '3306'
     }
