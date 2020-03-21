@@ -121,3 +121,23 @@ def rewind_swipe(uid):
     # 更新反悔次数
     rds.set(Rewind_K, rewind_times + 1, 86400)
 
+
+def users_like_me(uid):
+    # 取出自己滑动过的人的ID
+    sid_list = Swiped.objects.filter(uid=uid).values_list('sid', flat=True)
+
+    # 取出喜欢或超级喜欢我的人，以及是我没有滑动过的人的ID
+    social_type = ['like', 'superlike']
+    uid_list = Swiped.objects.filter(sid=uid, stype__in=social_type) \
+        .exclude(uid__in=sid_list).values_list('uid', flat=True)
+
+    # 取出这些人
+    users = User.objects.filter(id__in=uid_list)
+
+    return users
+
+
+def my_friends(uid):
+    friend_id_list = Friend.Myfriend(uid=uid)
+    users = User.objects.filter(id__in=friend_id_list)
+    return users

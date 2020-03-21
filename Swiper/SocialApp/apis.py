@@ -27,7 +27,17 @@ def dislike(request):
 
 
 def rewind(request):
-    
     logics.rewind_swipe(request.uid)
-    
     return render_json()
+
+
+def who_like_me(request):
+    users = logics.users_like_me(request.uid)
+    result = [user.to_dict() for user in users]
+    return render_json(result)
+
+
+def friends_list(request):
+    users = logics.my_friends(request.uid)
+    result = [user.to_dict() for user in users]
+    return render_json(result)
