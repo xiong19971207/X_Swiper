@@ -37,5 +37,6 @@ urlpatterns = [
     url(r'^api/social/like', social_api.like),
     url(r'^api/social/superlike', social_api.superlike),
     url(r'^api/social/dislike', social_api.dislike),
+    url(r'^api/social/rewind', social_api.rewind),
 
 ]

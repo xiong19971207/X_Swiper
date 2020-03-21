@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="mysql80@localhost" uuid="c3f2cc38-dba8-4aa1-8862-06ca1a460e62">
+    <data-source source="LOCAL" name="jdbc:mysql://localhost:3306/mysql80?serverTimezone=Asia/Shanghai" uuid="c6c65923-7eed-4d28-8b8d-2fffd5cc049a">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/mysql80?useSSL=false&amp;serverTimezone=Hongkong&amp;characterEncoding=utf-8&amp;autoReconnect=true</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/mysql80?serverTimezone=Asia/Shanghai</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="CONVERT_TO_NULL" />
@@ -14,6 +14,7 @@
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
       </driver-properties>
+      <time-zone>Asia/Shanghai</time-zone>
     </data-source>
   </component>
 </project>
